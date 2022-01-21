@@ -139,7 +139,7 @@ def launch_url(url):
 
 
 def inject(target, devtools=False, browser=False, timeout=None, scripts=None, port=None):
-    timeout = time.time() + int(timeout) if timeout else 5
+    timeout = time.time() + (int(timeout) if timeout else 5)
     scripts = dict.fromkeys(scripts or [])
 
     for name in scripts:
