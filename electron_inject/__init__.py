@@ -95,6 +95,8 @@ class ElectronRemoteDebugger(object):
                            'userGesture': True}}
 
         ret = json.loads(w['ws'].sendrcv(json.dumps(data)))
+        if "error" in ret:
+            raise Exception(ret['error'])
         if "result" not in ret:
             return ret
         if ret['result'].get('wasThrown'):
