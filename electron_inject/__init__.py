@@ -160,11 +160,11 @@ def inject(target, devtools=False, browser=False, timeout=None, scripts=None, po
                     logger.info("injecting %s into %s" % (name, w.get('id')))
                     logger.debug(erb.eval(w, content))
 
+                # patch windows only once and only if all scripts could be executed
+                windows_visited.add(w.get('id'))
+
             except Exception as e:
                 logger.exception(e)
-            finally:
-                # patch windows only once
-                windows_visited.add(w.get('id'))
 
         if time.time() > timeout or all(w.get('id') in windows_visited for w in erb.windows()):
             break
